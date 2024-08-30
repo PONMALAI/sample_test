@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+ul li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>List Creator</h1>
+        <input type="text" id="itemInput" placeholder="Enter item">
+        <button id="submitButton">Add to List</button>
+        <ul id="itemList"></ul>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    // Load the list from local storage when the page loads
+    const storedItems = JSON.parse(localStorage.getItem('itemsList')) || [];
+    const itemList = document.getElementById('itemList');
+
+    storedItems.forEach(function(item) {
+        const listItem = document.createElement('li');
+        listItem.textContent = item;
+        itemList.appendChild(listItem);
+    });
+
+    document.getElementById('submitButton').addEventListener('click', function() {
+        const input = document.getElementById('itemInput');
+        const itemText = input.value.trim();
+
+        if (itemText !== '') {
+            const listItem = document.createElement('li');
+            listItem.textContent = itemText;
+
+            itemList.appendChild(listItem);
+
+            // Save the item to local storage
+            storedItems.push(itemText);
+            localStorage.setItem('itemsList', JSON.stringify(storedItems));
+
+            input.value = ''; // Clear the input box after adding the item
+        }
+    });
+});
+
+
+    </script>
+</body>
+</html>
