@@ -69,12 +69,19 @@ ul li {
     </div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-    // Load the list from local storage when the page loads
-    const storedItems = JSON.parse(localStorage.getItem('itemsList')) || [];
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the jsonData array
+    var jsonData = [
+        "document",
+        "iefefeof",
+        "hcofhef",
+        "Selenium"
+    ];
+
     const itemList = document.getElementById('itemList');
 
-    storedItems.forEach(function(item) {
+    // Load the jsonData array into the list when the page loads
+    jsonData.forEach(function(item) {
         const listItem = document.createElement('li');
         listItem.textContent = item;
         itemList.appendChild(listItem);
@@ -88,17 +95,20 @@ ul li {
             const listItem = document.createElement('li');
             listItem.textContent = itemText;
 
+            // Add the new item to the list in the UI
             itemList.appendChild(listItem);
 
-            // Save the item to local storage
-            storedItems.push(itemText);
-            localStorage.setItem('itemsList', JSON.stringify(storedItems));
+            // Add the new item to the jsonData array
+            jsonData.push(itemText);
 
-            input.value = ''; // Clear the input box after adding the item
+            // Save the updated jsonData array to local storage
+            localStorage.setItem('itemsList', JSON.stringify(jsonData));
+
+            // Clear the input box after adding the item
+            input.value = '';
         }
     });
 });
-
 
     </script>
 </body>
